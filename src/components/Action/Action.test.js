@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Action from "./Action";
 
 describe("Given an Action component", () => {
@@ -19,6 +20,17 @@ describe("Given an Action component", () => {
 
       const actionResult = screen.getByRole("link");
       expect(actionResult.textContent).toBe(expectedAction);
+    });
+  });
+
+  describe("when being clicked", () => {
+    test("Then it should call an action", () => {
+      const action = jest.fn();
+
+      render(<Action action={"call"} actionOnClick={action} />);
+
+      userEvent.click(screen.getByRole("link"));
+      expect(action).toHaveBeenCalledTimes(1);
     });
   });
 });
