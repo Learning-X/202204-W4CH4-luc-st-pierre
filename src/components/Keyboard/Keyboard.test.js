@@ -20,4 +20,19 @@ describe("Given a Keyboard component", () => {
       userEvent.click(screen.getByText(keys[2]));
     });
   });
+
+  describe("When instantiated", () => {
+    test("Then is should render 10 keys (buttons), with a delete key button", () => {
+      const buttons = 11;
+
+      render(
+        <PhoneContextProvider>
+          <Keyboard />
+        </PhoneContextProvider>
+      );
+
+      const expectedButtons = screen.getAllByRole("button");
+      expect(expectedButtons.length).toBe(buttons);
+    });
+  });
 });
