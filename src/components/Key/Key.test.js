@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import Key from "./key";
 
 describe("Given a Key Component", () => {
@@ -11,6 +12,18 @@ describe("Given a Key Component", () => {
       const expectedText = screen.getByText(text);
 
       expect(expectedText).toBeInTheDocument();
+    });
+  });
+
+  describe("When instantiated with a key '4' and an action", () => {
+    test("Then it should execute action when clicked", () => {
+      const action = jest.fn();
+
+      render(<Key big={true} text={"4"} actionOnClick={action} />);
+
+      const expectedText = screen.getByText("4");
+      userEvent.click(expectedText);
+      expect(action).toBeCalled();
     });
   });
 });
