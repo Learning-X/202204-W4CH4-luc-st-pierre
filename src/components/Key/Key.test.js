@@ -26,4 +26,14 @@ describe("Given a Key Component", () => {
       expect(action).toBeCalled();
     });
   });
+
+  describe("When instantiated", () => {
+    test("Then is should render a button", () => {
+      render(<Key />);
+
+      const button = screen.getByRole("button");
+
+      expect(button).toBeInTheDocument();
+    });
+  });
 });
